@@ -5,6 +5,9 @@ import {
   text,
   timestamp,
   integer,
+  date,
+  boolean,
+  time,
 } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
@@ -63,6 +66,133 @@ export const invitations = pgTable('invitations', {
   status: varchar('status', { length: 20 }).notNull().default('pending'),
 });
 
+export const patients = pgTable('patients', {
+  id: serial('id').primaryKey(),
+
+  userId: integer('user_id')
+    .references(() => users.id, { onDelete: 'set null' }),
+
+  fullName: varchar('full_name', { length: 100 }).notNull(),
+  email: varchar('email', { length: 255 }),
+  phone: varchar('phone', { length: 20 }),
+  gender: varchar('gender', { length: 10 }),
+  dateOfBirth: date('date_of_birth'),
+
+  bloodType: varchar('blood_type', { length: 3 }),
+  allergies: text('allergies'),
+  medicalHistory: text('medical_history'),
+
+  nationalId: varchar('national_id', { length: 50 }).unique(),
+
+  isActive: boolean('is_active').notNull().default(true),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+export const appointments = pgTable('appointments', {
+  id: serial('id').primaryKey(),
+
+  patientId: integer('patient_id')
+    .notNull()
+    .references(() => patients.id, { onDelete: 'cascade' }),
+
+    providerId: integer('provider_id')
+    .references(() => providers.id, { onDelete: 'set null' }),
+  
+  serviceId: integer('service_id')
+    .references(() => services.id, { onDelete: 'set null' }), // Optional: "Dental Checkup", etc.
+
+  statusId: integer('status_id').references(() => appointmentStatuses.id), // pending, confirmed, completed, cancelled
+
+  notes: text('notes'),
+
+  scheduledAt: timestamp('scheduled_at').notNull(),
+  durationMinutes: integer('duration_minutes').notNull().default(30),
+
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+export const providers = pgTable('providers', {
+  id: serial('id').primaryKey(),
+
+  userId: integer('user_id')
+    .references(() => users.id, { onDelete: 'set null' }),
+
+  name: varchar('name', { length: 100 }).notNull(),
+  title: varchar('title', { length: 50 }), // Dr., Therapist, etc.
+  specialty: varchar('specialty', { length: 100 }),
+
+  phone: varchar('phone', { length: 20 }),
+  email: varchar('email', { length: 255 }),
+
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+export const services = pgTable('services', {
+  id: serial('id').primaryKey(),
+
+  name: varchar('name', { length: 100 }).notNull(), // e.g. "Dental Cleaning"
+  description: text('description'),
+  durationMinutes: integer('duration_minutes').notNull().default(30),
+
+  price: integer('price'), // cents or lowest currency unit
+
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+export const providerServices = pgTable('provider_services', {
+  id: serial('id').primaryKey(),
+
+  providerId: integer('provider_id')
+    .notNull()
+    .references(() => providers.id, { onDelete: 'cascade' }),
+
+  serviceId: integer('service_id')
+    .notNull()
+    .references(() => services.id, { onDelete: 'cascade' }),
+
+  customDuration: integer('custom_duration'),
+  customPrice: integer('custom_price'),
+});
+
+export const appointmentStatuses = pgTable('appointment_statuses', {
+  id: serial('id').primaryKey(),
+  status: varchar('status', { length: 20 }).notNull().unique(), // e.g. pending, confirmed
+});
+
+export const providerAvailabilities = pgTable('provider_availabilities', {
+  id: serial('id').primaryKey(),
+  providerId: integer('provider_id').references(() => providers.id, { onDelete: 'cascade' }),
+  dayOfWeek: varchar('day_of_week', { length: 10 }), // Mon, Tue, etc.
+  startTime: time('start_time'),
+  endTime: time('end_time'),
+});
+
+
+
+export const providersRelations = relations(providers, ({ one, many }) => ({
+  user: one(users, {
+    fields: [providers.userId],
+    references: [users.id],
+  }),
+  appointments: many(appointments),
+}));
+
+
+export const appointmentsRelations = relations(appointments, ({ one }) => ({
+  patient: one(patients, {
+    fields: [appointments.patientId],
+    references: [patients.id],
+  }),
+  provider: one(users, {
+    fields: [appointments.providerId],
+    references: [users.id],
+  }),
+}));
+
 export const teamsRelations = relations(teams, ({ many }) => ({
   teamMembers: many(teamMembers),
   activityLogs: many(activityLogs),
@@ -107,6 +237,14 @@ export const activityLogsRelations = relations(activityLogs, ({ one }) => ({
   }),
 }));
 
+export const patientsRelations = relations(patients, ({ one }) => ({
+  user: one(users, {
+    fields: [patients.userId],
+    references: [users.id],
+  }),
+}));
+
+
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
 export type Team = typeof teams.$inferSelect;
@@ -122,6 +260,23 @@ export type TeamDataWithMembers = Team & {
     user: Pick<User, 'id' | 'name' | 'email'>;
   })[];
 };
+export type Patient = typeof patients.$inferSelect;
+export type NewPatient = typeof patients.$inferInsert;
+export type Appointment = typeof appointments.$inferSelect;
+export type NewAppointment = typeof appointments.$inferInsert;
+export type Provider = typeof providers.$inferSelect;
+export type NewProvider = typeof providers.$inferInsert;
+
+export type Service = typeof services.$inferSelect;
+export type NewService = typeof services.$inferInsert;
+
+export type AppointmentStatus = typeof appointmentStatuses.$inferSelect;
+export type NewAppointmentStatus = typeof appointmentStatuses.$inferInsert;
+
+export type ProviderAvailability = typeof providerAvailabilities.$inferSelect;
+export type NewProviderAvailability = typeof providerAvailabilities.$inferInsert;
+
+
 
 export enum ActivityType {
   SIGN_UP = 'SIGN_UP',

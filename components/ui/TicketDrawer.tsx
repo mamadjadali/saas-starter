@@ -21,7 +21,7 @@ import {
   categoryTypes,
   policyTypes,
   priorities,
-  ticketTypes,
+  appointmentTypes,
   type Category,
   type PolicyType,
   type Ticket,
@@ -88,7 +88,7 @@ const FirstPage = ({ formData, onUpdateForm }: FormPageProps) => (
           className="grid grid-cols-2 gap-2 text-sm"
           onValueChange={(value) => onUpdateForm({ type: value })}
         >
-          {ticketTypes.map((type) => (
+          {appointmentTypes.map((type) => (
             <RadioCardItem
               key={type.value}
               value={type.value}
@@ -124,7 +124,7 @@ const FirstPage = ({ formData, onUpdateForm }: FormPageProps) => (
         </Select>
       </FormField>
 
-      <FormField label="Policy Type">
+      <FormField label="بیـمه">
         <Select
           value={formData.policyType}
           onValueChange={(value: PolicyType) =>
@@ -134,7 +134,7 @@ const FirstPage = ({ formData, onUpdateForm }: FormPageProps) => (
           <SelectTrigger>
             <SelectValue placeholder="Select Policy Type" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent dir="rtl">
             {policyTypes.map((type) => (
               <SelectItemExtended
                 key={type.value}
@@ -207,7 +207,7 @@ const SecondPage = ({ formData, onUpdateForm }: FormPageProps) => (
         />
       </FormField>
 
-      <FormField label="Expected Call Duration (minutes)">
+      {/* <FormField label="Expected Call Duration (minutes)">
         <Input
           name="duration"
           type="number"
@@ -218,7 +218,7 @@ const SecondPage = ({ formData, onUpdateForm }: FormPageProps) => (
           placeholder="0"
           min="0"
         />
-      </FormField>
+      </FormField> */}
     </DrawerBody>
   </>
 )
@@ -241,7 +241,7 @@ const SummaryPage = ({ formData }: { formData: TicketFormData }) => (
             <SummaryItem
               label="Type"
               value={
-                ticketTypes.find((t) => t.value === formData.type)?.name ??
+                appointmentTypes.find((t) => t.value === formData.type)?.name ??
                 undefined
               }
             />
@@ -309,7 +309,7 @@ export function TicketDrawer({ open, onOpenChange }: TicketDrawerProps) {
   const [formData, setFormData] = React.useState<TicketFormData>({
     status: "in-progress",
     category: categoryTypes[0].value,
-    type: ticketTypes[0].value,
+    type: appointmentTypes[0].value,
     policyType: policyTypes[0].value,
     priority: priorities[0].value,
     description: "",

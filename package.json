@@ -3,12 +3,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start",
-    "db:setup": "npx tsx lib/db/setup.ts",
-    "db:seed": "npx tsx lib/db/seed.ts",
-    "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio"
+    "start": "next start"
   },
   "dependencies": {
     "@faker-js/faker": "^9.7.0",
@@ -31,6 +26,7 @@
     "@remixicon/react": "^4.6.0",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/postcss": "4.1.1",
+    "@tanstack/match-sorter-utils": "^8.19.4",
     "@tanstack/react-table": "^8.21.3",
     "@types/node": "^22.14.0",
     "@types/react": "19.1.0",
@@ -41,14 +37,11 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "dotenv": "^16.4.7",
-    "drizzle-kit": "^0.30.6",
-    "drizzle-orm": "^0.41.0",
     "jose": "^6.0.10",
     "lucide-react": "^0.487.0",
     "next": "15.3.0-canary.31",
     "next-themes": "^0.4.6",
     "postcss": "^8.5.3",
-    "postgres": "^3.4.5",
     "react": "19.1.0",
     "react-dialog": "link:@radix-ui\\react-dialog",
     "react-dom": "19.1.0",
@@ -60,6 +53,7 @@
     "tailwindcss-animate": "^1.0.7",
     "tailwindcss-react-aria-components": "2.0.0",
     "typescript": "^5.8.2",
+    "use-debounce": "^10.0.4",
     "zod": "^3.24.2"
   }
 }

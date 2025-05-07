@@ -95,40 +95,40 @@ export const categoryTypes = [
 
 export const policyTypes = [
   {
-    name: "Auto Insurance",
-    value: "auto",
-    extended: "Vehicle Coverage",
-    description: "Coverage for cars, motorcycles, and other vehicles",
+    name: "آزاد",
+    value: "none",
+    extended: "none",
+    description: "تعرفه آزاد",
   },
   {
-    name: "Home Insurance",
-    value: "home",
-    extended: "Property Coverage",
-    description: "Protection for houses and personal property",
+    name: "بیمه درمان تامین اجتماعی",
+    value: "tamin",
+    extended: "health-related",
+    description: "پوشش خدمات پزشکی و سلامت",
   },
   {
-    name: "Life Insurance",
+    name: "بیمه درمان تکمیلی",
+    value: "takmili",
+    extended: "health-related",
+    description: "پوشش خدمات پزشکی و سلامت",
+  },
+  {
+    name: "بیمه‌ی عمر",
     value: "life",
-    extended: "Life Coverage",
-    description: "Life insurance and related benefits",
+    extended: "health-related",
+    description: "پوشش خدمات پزشکی و سلامت",
   },
   {
-    name: "Health Insurance",
-    value: "health",
-    extended: "Medical Coverage",
-    description: "Medical and health-related coverage",
+    name: "بیمه نیروهای مسلح",
+    value: "army",
+    extended: "health-related",
+    description: "پوشش خدمات پزشکی و سلامت",
   },
   {
-    name: "Business Insurance",
-    value: "business",
-    extended: "Commercial Coverage",
-    description: "Coverage for business and commercial needs",
-  },
-  {
-    name: "Umbrella Insurance",
-    value: "umbrella",
-    extended: "Extended Coverage",
-    description: "Additional liability coverage above standard policies",
+    name: " بیمه‌ی درمانی شهرداری",
+    value: "shar",
+    extended: "health-related",
+    description: "پوشش خدمات پزشکی و سلامت",
   },
 ] as const
 
@@ -146,25 +146,20 @@ export const getPolicyDetails = (value: PolicyType) => {
   return policyTypes.find((policy) => policy.value === value)
 }
 
-export const ticketTypes: {
+export const appointmentTypes: {
   name: string
   value: string
   extended: string
 }[] = [
   {
-    name: "First Notice of Loss",
-    value: "fnol",
-    extended: "First Notice of Loss Call",
+    name: "Routine Checkup",
+    value: "checkup",
+    extended: "Monthly or Annual Chekups",
   },
   {
-    name: "Policy Service",
-    value: "policy",
-    extended: "Policy Service Call",
-  },
-  {
-    name: "Claims Status",
-    value: "claims",
-    extended: "Claims Status Check",
+    name: "New Operation",
+    value: "operation",
+    extended: "New Operation",
   },
   {
     name: "Emergency",
@@ -172,14 +167,9 @@ export const ticketTypes: {
     extended: "Emergency Assistance",
   },
   {
-    name: "Coverage Review",
-    value: "coverage",
-    extended: "Policy Coverage Discussion",
-  },
-  {
-    name: "Billing Support",
-    value: "billing",
-    extended: "Payment & Billing Assistance",
+    name: "Consult",
+    value: "consult",
+    extended: "Consult Discussion",
   },
 ]
 

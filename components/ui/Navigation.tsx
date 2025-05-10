@@ -22,7 +22,7 @@ function Navigation() {
           <div className="">
           <Badge variant="success">Dr. Maryam Ranjbar</Badge>
           <span className="px-2">-</span>
-          <Badge variant="default">Dermatologist</Badge>
+          <Badge className="" variant="default">Dermatologist</Badge>
           </div>
           </div>
         </div>

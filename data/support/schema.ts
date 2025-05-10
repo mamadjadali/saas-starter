@@ -20,7 +20,7 @@ export type Status = (typeof statusOptions)[number]
 
 export const categoryTypes = [
   {
-    name: "Accident Report",
+    name: "Accident",
     value: "accident-report",
     extended: "Report a new accident or incident",
     description: "File initial accident reports and incidents",
@@ -32,64 +32,16 @@ export const categoryTypes = [
     description: "Immediate help for urgent situations",
   },
   {
-    name: "Claim Status",
-    value: "claim-status",
-    extended: "Check Existing Claim",
-    description: "Get updates on ongoing claims",
-  },
-  {
-    name: "Policy Changes",
-    value: "policy-changes",
-    extended: "Modify Policy Details",
-    description: "Update or modify existing policies",
-  },
-  {
-    name: "Coverage Inquiry",
-    value: "coverage-inquiry",
-    extended: "Coverage Information Request",
-    description: "Questions about policy coverage",
-  },
-  {
     name: "Document Request",
     value: "document-request",
     extended: "Policy Document Service",
     description: "Request insurance documentation",
   },
   {
-    name: "Billing",
-    value: "billing",
-    extended: "Payment & Billing Service",
-    description: "Handle payments and billing issues",
-  },
-  {
-    name: "New Quote",
-    value: "new-quote",
-    extended: "Insurance Quote Request",
-    description: "Get quotes for new policies",
-  },
-  {
-    name: "Account Service",
+    name: "Service",
     value: "account-service",
     extended: "Account Management",
     description: "General account-related assistance",
-  },
-  {
-    name: "Complaint",
-    value: "complaint",
-    extended: "File Complaint",
-    description: "Register and handle complaints",
-  },
-  {
-    name: "Fraud Report",
-    value: "fraud-report",
-    extended: "Report Suspicious Activity",
-    description: "Report potential fraud or suspicious claims",
-  },
-  {
-    name: "Agent Request",
-    value: "agent-request",
-    extended: "Agent Assistance",
-    description: "Connect with an insurance agent",
   },
 ] as const
 
@@ -186,20 +138,20 @@ export const priorities: {
     description: "Accidents, injuries, immediate assistance needed",
   },
   {
-    value: "high",
-    label: "High Priority",
+    value: "canceled",
+    label: "Canceled",
     sla: "4h",
     description: "Coverage issues, policy changes",
   },
   {
-    value: "medium",
-    label: "Medium Priority",
+    value: "pending",
+    label: "Pending",
     sla: "24h",
     description: "General inquiries, documentation requests",
   },
   {
-    value: "low",
-    label: "Low Priority",
+    value: "scheduled",
+    label: "Scheduled",
     sla: "48h",
     description: "Information requests, future policy changes",
   },

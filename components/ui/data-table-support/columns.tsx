@@ -18,7 +18,7 @@ const typeIconMapping: Record<string, React.ElementType> = {
 
 export const columns = [
   {
-    header: "Created at",
+    header: "Date",
     accessorKey: "created",
     meta: {
       className: "text-left",
@@ -28,7 +28,6 @@ export const columns = [
         {new Date(row.original.created).toLocaleDateString("en-GB", {
           day: "2-digit",
           month: "2-digit",
-          year: "numeric",
           hour: "2-digit",
           minute: "2-digit",
         })}
@@ -52,7 +51,7 @@ export const columns = [
     },
   },
   {
-    header: "Contact Type",
+    header: "Type",
     accessorKey: "type",
     meta: {
       className: "text-left",
@@ -70,34 +69,28 @@ export const columns = [
     },
   },
   {
-    header: "Duration",
+    header: "Doctor",
     accessorKey: "duration",
     meta: {
-      className: "text-right",
+      className: "center",
     },
     cell: ({ row }) => {
-      const DurationCell = (props: { minutes: string | null }) => {
-        if (props.minutes === null) return null
-        const mins = parseInt(props.minutes)
-        const hours = Math.floor(mins / 60)
-        const remainingMins = mins % 60
-
+      const DurationCell = () => {
         return (
           <span className="ml-auto text-gray-600 dark:text-gray-300">
-            {hours > 0 ? `${hours}h ` : ""}
-            {remainingMins}m
+            Dr.Maryam Ranjbar
           </span>
         )
       }
       return (
         <div className="flex items-center gap-2">
-          <DurationCell minutes={row.original.duration} />
+          <DurationCell />
         </div>
       )
     },
   },
   {
-    header: "Assessed Priority",
+    header: "Status",
     accessorKey: "priority",
     meta: {
       className: "text-left",
@@ -113,15 +106,15 @@ export const columns = [
             "bg-gray-500 dark:bg-gray-500",
             {
               "bg-emerald-600 dark:bg-emerald-400":
-                row.original.priority === "low",
+                row.original.priority === "scheduled",
             },
             {
               "bg-gray-500 dark:bg-gray-500":
-                row.original.priority === "medium",
+                row.original.priority === "pending",
             },
             {
               "bg-orange-500 dark:bg-orange-500":
-                row.original.priority === "high",
+                row.original.priority === "canceled",
             },
             {
               "bg-red-500 dark:bg-red-500":

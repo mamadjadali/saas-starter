@@ -6,9 +6,9 @@
 
 @plugin 'tailwindcss-animate';
 
-@variant dark (&:is(.dark *));
+@variant dark (&:is(.dark *)); 
 
-@theme {
+/* @theme {
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
 
@@ -55,7 +55,7 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
-}
+} */
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
@@ -65,7 +65,7 @@
   If we ever want to remove these styles, we need to add an explicit border
   color utility to any element that depends on these defaults.
 */
-@layer base {
+/* @layer base {
   *,
   ::after,
   ::before,
@@ -79,9 +79,9 @@
   body {
     font-family: 'Manrope', Arial, Helvetica, sans-serif;
   }
-}
+} */
 
-@layer base {
+/* @layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -167,7 +167,7 @@
   ---break---
 */
 
-:root {
+/* :root {
   --background: hsl(0 0% 100%);
   --foreground: hsl(240 10% 3.9%);
   --card: hsl(0 0% 100%);
@@ -193,13 +193,13 @@
   --chart-4: hsl(43 74% 66%);
   --chart-5: hsl(27 87% 67%);
   --radius: 0.6rem;
-}
+} */
 
 /*
   ---break---
 */
 
-.dark {
+/* .dark {
   --background: hsl(240 10% 3.9%);
   --foreground: hsl(0 0% 98%);
   --card: hsl(240 10% 3.9%);
@@ -224,13 +224,13 @@
   --chart-3: hsl(30 80% 55%);
   --chart-4: hsl(280 65% 60%);
   --chart-5: hsl(340 75% 55%);
-}
+} */
 
 /*
   ---break---
 */
 
-@theme inline {
+/* @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -259,17 +259,17 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-}
+} */
 
 /*
   ---break---
 */
 
-@layer base {
+/* @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
   }
-}
+} */

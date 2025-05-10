@@ -64,7 +64,7 @@ export default function SupportDashboard() {
                   className="size-2.5 shrink-0 rounded-sm bg-blue-500 dark:bg-blue-500"
                   aria-hidden="true"
                 />
-                <span className="text-sm">Resolved</span>
+                <span className="text-sm dark:text-white">Resolved</span>
               </div>
             </li>
             <li>
@@ -76,7 +76,7 @@ export default function SupportDashboard() {
                   className="size-2.5 shrink-0 rounded-sm bg-gray-400 dark:bg-gray-600"
                   aria-hidden="true"
                 />
-                <span className="text-sm">In Progress</span>
+                <span className="text-sm dark:text-white">In Progress</span>
               </div>
             </li>
             <li>
@@ -88,7 +88,7 @@ export default function SupportDashboard() {
                   className="size-2.5 shrink-0 rounded-sm bg-red-500 dark:bg-red-500"
                   aria-hidden="true"
                 />
-                <span className="text-sm">Escalated</span>
+                <span className="text-sm dark:text-white">Escalated</span>
               </div>
             </li>
           </ul>
@@ -105,7 +105,7 @@ export default function SupportDashboard() {
                     className="size-2.5 shrink-0 rounded-sm bg-blue-500 dark:bg-blue-500"
                     aria-hidden="true"
                   />
-                  <span className="text-sm">Within SLA</span>
+                  <span className="text-sm dark:text-white">Within SLA</span>
                 </div>
                 <span className="mt-1 block text-2xl font-semibold text-gray-900 dark:text-gray-50">
                   83.3%
@@ -141,7 +141,7 @@ export default function SupportDashboard() {
                     className="size-2.5 shrink-0 rounded-sm bg-blue-500 dark:bg-blue-500"
                     aria-hidden="true"
                   />
-                  <span className="text-sm">Today</span>
+                  <span className="text-sm dark:text-white">Today</span>
                 </div>
                 <span className="mt-1 block text-2xl font-semibold text-gray-900 dark:text-gray-50">
                   573
@@ -153,7 +153,7 @@ export default function SupportDashboard() {
                     className="size-2.5 shrink-0 rounded-sm bg-gray-400 dark:bg-gray-600"
                     aria-hidden="true"
                   />
-                  <span className="text-sm">Yesterday</span>
+                  <span className="text-sm dark:text-white">Yesterday</span>
                 </div>
                 <span className="mt-1 block text-2xl font-semibold text-gray-900 dark:text-gray-50">
                   451

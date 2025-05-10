@@ -7,6 +7,7 @@ import { Notifications } from "./Notifications"
 import { usePathname } from "next/navigation"
 import { Logo } from "../../public/Logo"
 import { DropdownUserProfile } from "./UserProfile"
+import { Badge } from "../Badge"
 
 function Navigation() {
   const pathname = usePathname()
@@ -14,8 +15,16 @@ function Navigation() {
     <div className="shadow-s sticky top-0 z-20 bg-white dark:bg-gray-950">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 pt-3">
         <div>
-          <span className="sr-only">Your Company</span>
+          <span className="sr-only">Doxset</span>
+          <div className="flex flex-row gap-8 items-center">
+
           <Logo className="h-8" />
+          <div className="">
+          <Badge variant="success">Dr. Maryam Ranjbar</Badge>
+          <span className="px-2">-</span>
+          <Badge variant="default">Dermatologist</Badge>
+          </div>
+          </div>
         </div>
         <div className="flex h-[42px] flex-nowrap gap-1">
           <Notifications />

@@ -16,7 +16,7 @@ import {
   SelectItemExtended,
   SelectTrigger,
   SelectValue,
-} from "@/components/Select"
+} from "./Select"
 import {
   categoryTypes,
   policyTypes,

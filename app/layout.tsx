@@ -1,5 +1,6 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
+import { ThemeProvider } from 'next-themes';
 import { Manrope } from 'next/font/google';
 
 export const metadata: Metadata = {
@@ -23,11 +24,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`bg-white dark:bg-gray-950 text-black dark:text-white ${manrope.className}`}
     >
-      <body className="min-h-[100dvh] dark:bg-gray-950 bg-gray-50">
+      <body>
+        <ThemeProvider defaultTheme='system' attribute="class">
         {/* <UserProvider userPromise={userPromise}></UserProvider> */}
         {children}
+        </ThemeProvider>
       </body>
     </html>
   );

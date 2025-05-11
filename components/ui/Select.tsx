@@ -1,12 +1,15 @@
-// Custom Select [v0.0.0]
+// Tremor Select [v0.0.3]
 
 import * as SelectPrimitives from "@radix-ui/react-select"
-import { RiArrowDownSLine, RiArrowUpSLine, RiCheckLine } from "@remixicon/react"
-import { format } from "date-fns"
+import {
+  RiArrowDownSLine,
+  RiArrowUpSLine,
+  RiCheckLine,
+  RiExpandUpDownLine,
+} from "@remixicon/react"
 import React from "react"
 
 import { cx, focusInput, hasErrorInput } from "@/lib/utils"
-import { DateRange } from "react-day-picker"
 
 const Select = SelectPrimitives.Root
 Select.displayName = "Select"
@@ -41,7 +44,7 @@ const selectTriggerStyles = [
 ]
 
 const SelectTrigger = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitives.Trigger>,
+  React.ComponentRef<typeof SelectPrimitives.Trigger>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitives.Trigger> & {
     hasError?: boolean
   }
@@ -54,14 +57,15 @@ const SelectTrigger = React.forwardRef<
         hasError ? hasErrorInput : "",
         className,
       )}
+      tremor-id="tremor-raw"
       {...props}
     >
       <span className="truncate">{children}</span>
       <SelectPrimitives.Icon asChild>
-        <RiArrowDownSLine
+        <RiExpandUpDownLine
           className={cx(
             // base
-            "-mr-1 size-5 shrink-0",
+            "size-4 shrink-0",
             // text color
             "text-gray-400 dark:text-gray-600",
             // disabled
@@ -76,7 +80,7 @@ const SelectTrigger = React.forwardRef<
 SelectTrigger.displayName = "SelectTrigger"
 
 const SelectScrollUpButton = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitives.ScrollUpButton>,
+  React.ComponentRef<typeof SelectPrimitives.ScrollUpButton>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitives.ScrollUpButton>
 >(({ className, ...props }, forwardedRef) => (
   <SelectPrimitives.ScrollUpButton
@@ -93,7 +97,7 @@ const SelectScrollUpButton = React.forwardRef<
 SelectScrollUpButton.displayName = SelectPrimitives.ScrollUpButton.displayName
 
 const SelectScrollDownButton = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitives.ScrollDownButton>,
+  React.ComponentRef<typeof SelectPrimitives.ScrollDownButton>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitives.ScrollDownButton>
 >(({ className, ...props }, forwardedRef) => (
   <SelectPrimitives.ScrollDownButton
@@ -111,7 +115,7 @@ SelectScrollDownButton.displayName =
   SelectPrimitives.ScrollDownButton.displayName
 
 const SelectContent = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitives.Content>,
+  React.ComponentRef<typeof SelectPrimitives.Content>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitives.Content>
 >(
   (
@@ -172,7 +176,7 @@ const SelectContent = React.forwardRef<
 SelectContent.displayName = "SelectContent"
 
 const SelectGroupLabel = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitives.Label>,
+  React.ComponentRef<typeof SelectPrimitives.Label>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitives.Label>
 >(({ className, ...props }, forwardedRef) => (
   <SelectPrimitives.Label
@@ -191,7 +195,7 @@ const SelectGroupLabel = React.forwardRef<
 SelectGroupLabel.displayName = "SelectGroupLabel"
 
 const SelectItem = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitives.Item>,
+  React.ComponentRef<typeof SelectPrimitives.Item>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitives.Item>
 >(({ className, children, ...props }, forwardedRef) => {
   return (
@@ -227,18 +231,20 @@ const SelectItem = React.forwardRef<
 
 SelectItem.displayName = "SelectItem"
 
-const SelectItemPeriod = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitives.Item>,
+// new component created specifically for this template, outside of Tremor's standard components
+const SelectItemExtended = React.forwardRef<
+  React.ComponentRef<typeof SelectPrimitives.Item>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitives.Item> & {
-    period?: DateRange | undefined
+    option: string
+    description: string | boolean
   }
->(({ className, children, period, ...props }, forwardedRef) => {
+>(({ className, option, description, ...props }, forwardedRef) => {
   return (
     <SelectPrimitives.Item
       ref={forwardedRef}
       className={cx(
         // base
-        "relative flex cursor-pointer items-center rounded py-2 pl-8 pr-3 outline-none transition-colors data-[state=checked]:font-semibold sm:text-sm",
+        "flex max-w-[var(--radix-select-trigger-width)] cursor-pointer items-center justify-between whitespace-nowrap rounded px-3 py-2 outline-none transition-colors data-[state=checked]:font-semibold sm:text-sm",
         // text color
         "text-gray-900 dark:text-gray-50",
         // disabled
@@ -251,36 +257,18 @@ const SelectItemPeriod = React.forwardRef<
       )}
       {...props}
     >
-      <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
-        <SelectPrimitives.ItemIndicator>
-          <RiCheckLine
-            className="size-5 shrink-0 text-gray-800 dark:text-gray-200"
-            aria-hidden="true"
-          />
-        </SelectPrimitives.ItemIndicator>
+      <SelectPrimitives.ItemText>{option}</SelectPrimitives.ItemText>
+      <span className="ml-2 truncate font-normal text-gray-400 dark:text-gray-600">
+        {description}
       </span>
-      <div className="flex w-full items-center">
-        {/* adapt width accordingly if you use longer names for periods */}
-        <span className="w-40 sm:w-32">
-          <SelectPrimitives.ItemText>{children}</SelectPrimitives.ItemText>
-        </span>
-        <span>
-          {period?.from && period?.to && (
-            <span className="whitespace-nowrap font-normal text-gray-400">
-              {format(period.from, "MMM d, yyyy")} –{" "}
-              {format(period.to, "MMM d, yyyy")}
-            </span>
-          )}
-        </span>
-      </div>
     </SelectPrimitives.Item>
   )
 })
 
-SelectItemPeriod.displayName = "SelectItemPeriod"
+SelectItemExtended.displayName = "SelectItemExtended"
 
 const SelectSeparator = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitives.Separator>,
+  React.ComponentRef<typeof SelectPrimitives.Separator>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitives.Separator>
 >(({ className, ...props }, forwardedRef) => (
   <SelectPrimitives.Separator
@@ -296,7 +284,6 @@ const SelectSeparator = React.forwardRef<
   />
 ))
 
-
 SelectSeparator.displayName = "SelectSeparator"
 
 export {
@@ -305,7 +292,7 @@ export {
   SelectGroup,
   SelectGroupLabel,
   SelectItem,
-  SelectItemPeriod,
+  SelectItemExtended,
   SelectSeparator,
   SelectTrigger,
   SelectValue,

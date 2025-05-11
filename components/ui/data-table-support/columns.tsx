@@ -77,7 +77,7 @@ export const columns = [
     cell: ({ row }) => {
       const DurationCell = () => {
         return (
-          <span className="ml-auto text-gray-600 dark:text-gray-300">
+          <span className="text-gray-600 dark:text-gray-300">
             Dr.Maryam Ranjbar
           </span>
         )

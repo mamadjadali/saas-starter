@@ -30,6 +30,7 @@ import React from "react"
 import { Input } from "../Input"
 import { Label } from "../Label"
 import { Textarea } from "../Textarea"
+import DateSlotComponent from "../comp-505"
 
 type TicketFormData = Partial<Ticket>
 
@@ -75,9 +76,9 @@ const FirstPage = ({ formData, onUpdateForm }: FormPageProps) => (
   <>
     <DrawerHeader>
       <DrawerTitle>
-        <p>Create Support Ticket</p>
+        <p>Create Appointment</p>
         <span className="text-sm font-normal text-gray-500 dark:text-gray-500">
-          Ticket Type & Category
+          Type & Category
         </span>
       </DrawerTitle>
     </DrawerHeader>
@@ -164,14 +165,14 @@ const SecondPage = ({ formData, onUpdateForm }: FormPageProps) => (
   <>
     <DrawerHeader>
       <DrawerTitle>
-        <p>Ticket Details</p>
+        <p>Date & Time Details</p>
         <span className="text-sm font-normal text-gray-500 dark:text-gray-500">
-          Priority & Description
+          Date & Description
         </span>
       </DrawerTitle>
     </DrawerHeader>
     <DrawerBody className="-mx-6 space-y-6 overflow-y-scroll border-t border-gray-200 px-6 dark:border-gray-800">
-      <FormField label="Priority Level">
+      {/* <FormField label="Priority Level">
         <RadioCardGroup
           defaultValue={formData.priority}
           className="grid grid-cols-1 gap-2 text-sm"
@@ -195,8 +196,8 @@ const SecondPage = ({ formData, onUpdateForm }: FormPageProps) => (
             </RadioCardItem>
           ))}
         </RadioCardGroup>
-      </FormField>
-
+      </FormField> */}
+      <DateSlotComponent/>
       <FormField label="Description">
         <Textarea
           name="description"

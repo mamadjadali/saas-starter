@@ -6,6 +6,9 @@ import { CategoryBar } from "@/components/CategoryBar"
 import { Divider } from "@/components/Divider"
 import { LineChartSupport } from "@/components/LineChartSupport"
 import { ProgressCircle } from "@/components/ProgressCircle"
+import Terms from "@/components/comp-319"
+import EditProfile from "@/components/comp-331"
+import Onboarding from "@/components/comp-332"
 import { TicketDrawer } from "@/components/ui/TicketDrawer"
 import { DataTable } from "@/components/ui/data-table-support/DataTable"
 import { columns } from "@/components/ui/data-table-support/columns"
@@ -130,50 +133,11 @@ export default function SupportDashboard() {
           </div>
         </Card>
         <Card>
-          <dt className="text-sm font-medium text-gray-900 dark:text-gray-50">
-            Call Volume Trends
-          </dt>
-          <div className="mt-4 flex items-center gap-x-8 gap-y-4">
-            <dd className="space-y-3 whitespace-nowrap">
-              <div>
-                <div className="flex items-center gap-2">
-                  <span
-                    className="size-2.5 shrink-0 rounded-sm bg-blue-500 dark:bg-blue-500"
-                    aria-hidden="true"
-                  />
-                  <span className="text-sm dark:text-white">Today</span>
-                </div>
-                <span className="mt-1 block text-2xl font-semibold text-gray-900 dark:text-gray-50">
-                  573
-                </span>
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <span
-                    className="size-2.5 shrink-0 rounded-sm bg-gray-400 dark:bg-gray-600"
-                    aria-hidden="true"
-                  />
-                  <span className="text-sm dark:text-white">Yesterday</span>
-                </div>
-                <span className="mt-1 block text-2xl font-semibold text-gray-900 dark:text-gray-50">
-                  451
-                </span>
-              </div>
-            </dd>
-            <LineChartSupport
-              className="h-28"
-              data={volume}
-              index="time"
-              categories={["Today", "Yesterday"]}
-              colors={["blue", "lightGray"]}
-              showTooltip={false}
-              valueFormatter={(number: number) =>
-                Intl.NumberFormat("us").format(number).toString()
-              }
-              startEndOnly={true}
-              showYAxis={false}
-              showLegend={false}
-            />
+          <div className="flex flex-col gap-6 p-2">
+            <EditProfile/>
+            <Onboarding/>
+            <Terms/>
+
           </div>
         </Card>
       </dl>

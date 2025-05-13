@@ -40,4 +40,6 @@ next-env.d.ts
 postgres_data/
 .env*.local
 
+prisma\dev.db
 prisma/dev.db
+*.db

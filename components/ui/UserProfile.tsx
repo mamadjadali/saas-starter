@@ -1,5 +1,6 @@
 "use client"
 
+import { signOutAction } from "@/actions/sign-out"
 import { siteConfig } from "@/app/(patient)/siteConfig"
 import {
   DropdownMenu,
@@ -23,9 +24,10 @@ import {
   RiSunLine,
 } from "@remixicon/react"
 import { useTheme } from "next-themes"
-import React from "react"
+import React, { useTransition } from "react"
 
 function DropdownUserProfile() {
+  const [isPending, startTransition] = useTransition();
   const [mounted, setMounted] = React.useState(false)
   const { theme, setTheme } = useTheme()
   React.useEffect(() => {
@@ -129,10 +131,12 @@ function DropdownUserProfile() {
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem>
-              <a href={siteConfig.baseLinks.login} className="w-full">
-                Sign out
-              </a>
+            <DropdownMenuItem
+            onClick={() => startTransition(() => signOutAction())}
+            disabled={isPending}
+            className="w-full cursor-pointer"
+            >
+            {isPending ? "Signing out..." : "Sign out"}
             </DropdownMenuItem>
           </DropdownMenuGroup>
         </DropdownMenuContent>

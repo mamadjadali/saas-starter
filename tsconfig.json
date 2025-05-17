@@ -33,6 +33,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "lib/auth.d.ts",
     ".next/types/**/*.ts"
   ],
   "exclude": [

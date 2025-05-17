@@ -5,6 +5,7 @@ import "./globals.css"
 import { siteConfig } from "../siteConfig"
 
 import { Sidebar } from "@/components/ui/navigation/Sidebar"
+import { auth } from "@/auth"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -37,11 +38,15 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+
+  const session = await auth();
+  console.log(session);
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body

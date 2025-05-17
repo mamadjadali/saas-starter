@@ -10,7 +10,7 @@ const GoogleLogin = () => {
     const [errorMsgGoogle, dispatchGoogle] = useActionState(googleAuthenticate, undefined) //googleAuthenticate hook
   return (
     <form className="flex mt-4" action={dispatchGoogle}>
-    <Button variant={"outline"} className='flex flex-row items-center gap-3 w-full'>
+    <Button variant={"outline"} className='flex flex-row hover:border-blue-400 hover:text-blue-600 items-center cursor-pointer gap-3 w-full border-gray-400 rounded-xl'>
         <BsGoogle />Google Sign In
     </Button>
     <p>{errorMsgGoogle}</p>

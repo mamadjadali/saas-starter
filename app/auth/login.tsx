@@ -7,16 +7,15 @@
 // import { Input } from '@/components/ui/input';
 // import { Label } from '@/components/ui/label';
 // import { CircleIcon, Loader2 } from 'lucide-react';
-// import { signIn, signUp } from './actions';
-// import { ActionState } from '@/lib/auth/middleware';
+// import { signInAction, signUp } from './actions';
 
 // export function Login({ mode = 'signin' }: { mode?: 'signin' | 'signup' }) {
 //   const searchParams = useSearchParams();
 //   const redirect = searchParams.get('redirect');
 //   const priceId = searchParams.get('priceId');
 //   const inviteId = searchParams.get('inviteId');
-//   const [state, formAction, pending] = useActionState<ActionState, FormData>(
-//     mode === 'signin' ? signIn : signUp,
+//   const [formAction, pending] = useActionState<FormData>(
+//     mode === 'signin' ? signInAction : signUp,
 //     { error: '' }
 //   );
 

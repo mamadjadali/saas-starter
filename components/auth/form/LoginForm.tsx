@@ -115,7 +115,7 @@ const LoginForm = () => {
         </div>
           <FormSuccess message={success} />
           <FormError message={error} />
-          <Button type="submit" className="w-full flex justify-center items-center cursor-pointer py-2 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-blue-900 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500" disabled={loading}>
+          <Button type="submit" className="w-full flex justify-center items-center cursor-pointer py-2 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-blue-900 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2" disabled={loading}>
             {loading ? "Loading..." : "Login"}
           </Button>
         </form>
